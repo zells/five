@@ -2,7 +2,7 @@
 
 This is the fifth incarnation of a *zells* prototype, implemented with Squeak Smalltalk. Its programming model is described [here](https://github.com/zells/core/blob/master/model.md).
 
-You can find a demo of this prototype [here](https://www.youtube.com/watch?v=T0fLZ8XceLo).
+You can find a demo (using [this](https://github.com/zells/five/tree/12eb77914d39e47493fc94dfbdc5b16d22d7e2fd) version) of this prototype [here](https://www.youtube.com/watch?v=T0fLZ8XceLo).
 
 ## Installation
 

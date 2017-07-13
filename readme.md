@@ -2,7 +2,7 @@
 
 This is the fifth incarnation of a *zells* prototype, implemented with Squeak Smalltalk. Its programming model is described [here](https://github.com/zells/core/blob/master/model.md).
 
-You can find a demo (using [this](https://github.com/zells/five/tree/12eb77914d39e47493fc94dfbdc5b16d22d7e2fd) version) of this prototype [here](https://www.youtube.com/watch?v=T0fLZ8XceLo).
+You can find a demo of this prototype [here](https://www.youtube.com/watch?v=T0fLZ8XceLo).
 
 ## Installation
 
@@ -13,71 +13,60 @@ Download [Squeak Smalltalk] and run the included image. After you've cloned the 
 
 ## Usage
 
-Paste the following text into a Workspace and execute ('do-it') each line individually.
+Paste the code blocks into a *workspace* and execute (*do-it*) each line individually.
 
-### Create a Dish
-
-Create a new, empty Dish and put it somewhere.
+### Reception
 
 ```smalltalk
-(Z5DishMorph for: Z5Dish new) openInWindow openInHand.
-```
-
-### Simple back-and-forth
-
-Zells can react to received Signals. Drop these Zells into the Dish and click on them.
-
-```smalltalk
-"This Zell emits a Signal when clicked"
-(Z5ButtonZellMorph emitting: #hey) openInHand.
-
-"Click on this Zell to see all Signals it receives."
 (Z5ListenerZellMorph new) openInHand.
-
-"Simple Zell that responds with 'ho' to every 'hey' it hears"
-(Z5ZellMorph for: (Z5DynamicZell doing: [ :s :z | (s isA: '"hey"') ifTrue: [z accept: s. z emit: (Z5StemZell thatIsA: '"ho"')]])) openInHand.
-```
-
-### Emitter
-
-This Zell can be used to emit any Signal. Click on it to open the drop zone and drop the next Zell into it.
-
-```smalltalk
-(Z5EmitterZellMorph new) openInHand.
 
 (Z5StemZellMorph for: (Z5StemZell thatIsA: '"Hello World"')) openInHand.
 ```
 
-### Turtle
+### Control
 
-The *Turtle* can go forward, turn and jump back to its starting position using these three Signals.
-	
 ```smalltalk
 (Z5TurtleZellMorph new) openInHand.
 
-(Z5ButtonZellMorph emitting: #go) openInHand.
-(Z5ButtonZellMorph emitting: #turn) openInHand.
-(Z5ButtonZellMorph emitting: #reset) openInHand.
-
-"This Signal will make the Turtle go forward a little more"
-(Z5StemZellMorph for: (Z5StemZell named: #go thatIsA: '30')) openInHand.
+(Z5StemZellMorph for: (Z5StemZell named: #go)) openInHand.
+(Z5StemZellMorph for: (Z5StemZell named: #turn)) openInHand.
+(Z5StemZellMorph for: (Z5StemZell named: #reset)) openInHand.
 ```
 
-### Clock
+### Transmission
 
-A *Clock* emits its Signals with every tick. Click on the Clock to open its editor. Then drop a "go" and a "turn" Signal into it. Then emit the "start" Signal (by dropping it into the Emitter window) to start it. The other two Signals stop and clear the Clock.
+```smalltalk
+(Z5DishMorph for: Z5Dish new) openInWindow openInHand.
+
+(Z5EmitterZellMorph new) openInHand.
+```
+
+```smalltalk
+(Z5ButtonZellMorph new) openInHand.
+
+(Z5StemZellMorph for: (Z5StemZell named: 'go' thatIsA: '5')) openInHand.
+(Z5StemZellMorph for: (Z5StemZell named: 'turn' thatIsA: '30')) openInHand.
+```
+
+### Reaction
+
+```smalltalk
+(Z5StemZellMorph for: (Z5StemZell named: #hey)) openInHand.
+
+(Z5ZellMorph for: (Z5DynamicZell doing: [ :s :z | (s name = #hey) ifTrue: [z emit: (Z5StemZell named: #ho)]])) openInHand.
+```
+
+### Repetition
 
 ```smalltalk
 Z5ClockZellMorph new openInHand.
 
-(Z5ButtonZellMorph emitting: #start) openInHand.
-(Z5ButtonZellMorph emitting: #stop) openInHand.
-(Z5ButtonZellMorph emitting: #clear) openInHand.
+(Z5StemZellMorph for: (Z5StemZell named: #start)) openInHand.
+(Z5StemZellMorph for: (Z5StemZell named: #stop)) openInHand.
+(Z5StemZellMorph for: (Z5StemZell named: #clear)) openInHand.
 ```
 
 ### Arithmetic
-
-You can do simple arithmetic by dropping a Number named *distance* into the Dish and emit the following Signal to add `4` to it. Since distance *is* `4`, it will emit a Signal with the *result* `7`. You can also ask distance to *be* `1`.
 
 ```smalltalk
 (Z5StemZellMorph for:(Z5NumberZell named:#distance thatIsA: '3')) openInHand.
@@ -89,12 +78,10 @@ You can do simple arithmetic by dropping a Number named *distance* into the Dish
 
 ### Spiral
 
-To make the Turtle draw a spiral, stop and clear the Clock and add these three Signals and start it.
-
 ```smalltalk
 (Z5StemZellMorph for: (Z5StemZell named: #go thatIsA: 'distance')) openInHand.
 
 (Z5StemZellMorph for: (Z5StemZell new haveA: (Z5StemZell named: #target thatIsA: '"distance"'); haveA: (Z5StemZell named: #increaseBy thatIsA: '0.1'))) openInHand.
 
-(Z5StemZellMorph for: (Z5StemZell thatIsA: '"turn"')) openInHand.
+(Z5StemZellMorph for: (Z5StemZell named: #turn)) openInHand.
 ```

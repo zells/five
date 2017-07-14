@@ -30,7 +30,6 @@ Paste the code blocks into a *workspace* and execute (*do-it*) each line individ
 
 (Z5StemZellMorph for: (Z5StemZell named: #go)) openInHand.
 (Z5StemZellMorph for: (Z5StemZell named: #turn)) openInHand.
-(Z5StemZellMorph for: (Z5StemZell named: #reset)) openInHand.
 ```
 
 ### Transmission
@@ -42,10 +41,11 @@ Paste the code blocks into a *workspace* and execute (*do-it*) each line individ
 ```
 
 ```smalltalk
-(Z5ButtonZellMorph new) openInHand.
+(Z5StemZellMorph for: (Z5StemZell named: 'understood signals̀')) openInHand.
+```
 
-(Z5StemZellMorph for: (Z5StemZell named: 'go' thatIsA: '5')) openInHand.
-(Z5StemZellMorph for: (Z5StemZell named: 'turn' thatIsA: '30')) openInHand.
+```smalltalk
+(Z5ButtonZellMorph new) openInHand.
 ```
 
 ### Reaction
@@ -60,20 +60,12 @@ Paste the code blocks into a *workspace* and execute (*do-it*) each line individ
 
 ```smalltalk
 Z5ClockZellMorph new openInHand.
-
-(Z5StemZellMorph for: (Z5StemZell named: #start)) openInHand.
-(Z5StemZellMorph for: (Z5StemZell named: #stop)) openInHand.
-(Z5StemZellMorph for: (Z5StemZell named: #clear)) openInHand.
 ```
 
 ### Arithmetic
 
 ```smalltalk
 (Z5StemZellMorph for:(Z5NumberZell named:#distance thatIsA: '3')) openInHand.
-
-(Z5StemZellMorph for: (Z5StemZell new haveA: (Z5StemZell named: #target thatIsA: '"distance"'); haveA: (Z5StemZell named: #add thatIsA: '4'); haveA: (Z5StemZell named: #tellResultTo thatIsA: '"bob"'))) openInHand
-
-(Z5StemZellMorph for: (Z5StemZell new haveA: (Z5StemZell named: #target thatIsA: '"distance"'); haveA: (Z5StemZell named: #be thatIsA: '1'))) openInHand.
 ```
 
 ### Spiral
